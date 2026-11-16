@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "solidcraft-guide"
+version = "0.1.0"
+description = "Generate SolidCraft step-by-step guides from human-readable stories."
+requires-python = ">=3.11"
+dependencies = [
+    "mss>=10.0",
+    "Pillow>=11.0",
+]
+
+[project.scripts]
+scguide = "scguide.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
