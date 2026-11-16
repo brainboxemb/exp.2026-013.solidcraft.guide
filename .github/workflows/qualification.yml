@@ -1,0 +1,31 @@
+name: Qualification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  basic-box:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: python -m pip install -e . pytest
+
+      - name: Unit tests
+        run: pytest -q
+
+      - name: Run practical basic-box story
+        run: python scripts/qualify_basic_box.py
+
+      - name: Upload generated guide
+        uses: actions/upload-artifact@v4
+        with:
+          name: basic-box-guide
+          path: build/qualification/basic-box/
